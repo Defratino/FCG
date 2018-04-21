@@ -8,6 +8,13 @@ all_cards_available = \
         "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "0D", "jD", "qD", "kD", "aD",
     ]
 
+card_color = \
+    {
+        'S': (0, 0, 0),
+        'C': (0, 0, 0),
+        'H': (255, 0, 0),
+        'D': (255, 0, 0)
+    }
 
 def get_random_card():
     random.shuffle(all_cards_available)
