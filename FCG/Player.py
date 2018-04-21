@@ -12,7 +12,16 @@ class Player:
         self.color = color
 
     def move(self):
-        pass # Add player controller
+        k = pygame.key.get_pressed()
+        if k[pygame.K_RIGHT] or k[pygame.K_d]:
+            self.x += self.speed
+        if k[pygame.K_LEFT] or k[pygame.K_a]:
+            self.x -= self.speed
+
+        if k[pygame.K_UP] or k[pygame.K_w]:
+            self.y -= self.speed
+        if k[pygame.K_DOWN] or k[pygame.K_s]:
+            self.y += self.speed
 
     def draw(self):
         pygame.draw.rect(self.game_display, self.color, [self.x, self.y, self.size, self.size])
