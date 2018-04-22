@@ -23,3 +23,11 @@ def get_random_card():
     card = all_cards_available[0]
     all_cards_available.remove(card)
     return card
+
+def get_top_cards(num):
+    arr = []
+    for i in range(num):
+        card = all_cards_available[0]
+        all_cards_available.remove(card)
+        arr.append(card)
+    return arr

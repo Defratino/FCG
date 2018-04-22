@@ -4,6 +4,8 @@ import pygame
 import Player
 import colors
 import display_constants
+import Hand
+import CardUtil
 from objects import Platform
 
 pygame.init()
@@ -11,10 +13,12 @@ pygame.init()
 game_display = pygame.display.set_mode((display_constants.DISPLAY_WIDTH, display_constants.DISPLAY_HEIGHT))
 clock = pygame.time.Clock()
 
-l1 = Level.Level('2S', 'kS')
+l1 = Level.Level(CardUtil.get_random_card(), CardUtil.get_random_card())
 p1 = Player.Player(game_display, 3, 10, colors.LOCAL_PLAYER_COLOR, l1)
 pla1 = Platform.Platform(game_display, 0, 200, 400, 5, l1)
 pla2 = Platform.Platform(game_display, 0, 250, 400, 5, l1)
+
+h1 = Hand.Hand(game_display, CardUtil.get_top_cards(5))
 
 while True:
 
@@ -38,6 +42,7 @@ while True:
     l1.draw()
     pla1.draw()
     pla2.draw()
+    h1.draw()
 
     # end draw
 
