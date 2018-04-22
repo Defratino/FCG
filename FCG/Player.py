@@ -28,7 +28,7 @@ class Player:
         if k[pygame.K_LEFT] or k[pygame.K_a]:
             self.x_speed -= self.speed
 
-        if k[pygame.K_SPACE]:
+        if pygame.mouse.get_pressed()[0]:
             self.shoot()
 
         if collision_all(self, self.level.platforms, 0, 1) and not collision_all(self, self.level.platforms):
