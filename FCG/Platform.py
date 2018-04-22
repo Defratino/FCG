@@ -1,8 +1,8 @@
 import pygame
 import CardUtil
 
-class Platform:
 
+class Platform:
     def __init__(self, game_display, x, y, width, height, level):
         self.x = x
         self.y = y
@@ -14,5 +14,5 @@ class Platform:
 
     def draw(self):
         pygame.draw.rect(self.game_display,
-                        self.color,
-                        [self.x, self.y, self.width, self.height])
+                         self.color,
+                         [self.x, self.y, self.width, self.height])

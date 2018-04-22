@@ -1,4 +1,5 @@
 import random
+import colors
 
 all_cards_available = \
     [
@@ -10,11 +11,12 @@ all_cards_available = \
 
 card_color = \
     {
-        'S': (0, 0, 0),
-        'C': (0, 0, 0),
-        'H': (255, 0, 0),
-        'D': (255, 0, 0)
+        'S': colors.BLACK,
+        'C': colors.BLACK,
+        'H': colors.RED,
+        'D': colors.RED
     }
+
 
 def get_random_card():
     random.shuffle(all_cards_available)
