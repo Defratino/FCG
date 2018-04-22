@@ -1,9 +1,10 @@
+from objects import Level
 import pygame
+
 import Player
-import Level
-import Platform
-import display_constants
 import colors
+import display_constants
+from objects import Platform
 
 pygame.init()
 

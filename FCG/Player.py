@@ -1,8 +1,10 @@
-import pygame
-import numpy
 import math
+
+import numpy
+import pygame
+
 from Scripts import collision_all
-import Bullet
+from objects import Bullet
 
 
 class Player:
