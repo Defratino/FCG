@@ -25,9 +25,10 @@ class Server:
                                                            self.send_sockets, self.open_client_sockets)
 
         for current_socket in self.send_sockets:
+            self.send_sockets.remove(current_socket)
             for client_id, client_data in self.client_data.iteritems():
-                current_socket.send(client_id + ":" + client_data + "#")  # 1:abc#2:def
-            current_socket.send('-')
+                current_socket.send(client_id + online_constants.ID_SEPERATOR + client_data + online_constants.PLAYER_SEPERATOR)
+            current_socket.send(online_constants.END_OF_MESSAGE)
 
         for current_socket in self.rlist:
             # check for new connection
@@ -38,24 +39,15 @@ class Server:
                 # receive data
                 data = ''
                 last_char = ''
-                while last_char != '-':
+                while last_char != online_constants.END_OF_MESSAGE:
                     last_char = current_socket.recv(online_constants.READ_SIZE)
-                    print last_char
                     data += last_char
 
-                print data
-                self.client_data[data.split(':')[0]] = data.split(':')[1]
+                data = data[:-1]
+                self.client_data[data.split(online_constants.ID_SEPERATOR)[0]] = data.split(online_constants.ID_SEPERATOR)[1]
                 self.send_sockets.append(current_socket)
 
-
-        '''
-        except socket.error as err:
-            print ERR1 + str(err)
-
-        finally:
-            rlist[1].close()
-            rlist[2].close()
-        '''
+        return online_constants.END_OF_COMMUNICATION in self.client_data.values()
 
 
 def main():
@@ -64,7 +56,7 @@ def main():
     while not end_loop:
 
         try:
-            s.update()
+            end_loop = s.update()
         except socket.error as err:
             print online_constants.ERR1 + str(err)
             for sock in s.rlist:
@@ -74,6 +66,9 @@ def main():
             for sock in s.xlist:
                 sock.close()
             end_loop = True
+
+    for current_socket in s.send_sockets:
+        current_socket.send(online_constants.END_OF_COMMUNICATION + online_constants.END_OF_MESSAGE)
 
     for sock in s.rlist:
         s.rlist.remove(sock)
@@ -85,7 +80,6 @@ def main():
         s.xlist.remove(sock)
         sock.close()
     s.server_socket.close()
-
 
 if __name__ == '__main__':
     main()
